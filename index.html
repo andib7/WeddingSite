@@ -25,6 +25,7 @@
 
   /* header */
   .monogram{font-family:var(--script);font-size:clamp(46px,10vw,58px);text-align:center;color:#5A4A3F;line-height:1}
+  .announce{font-family:var(--serif);font-style:italic;font-size:clamp(17px,3.5vw,20px);text-align:center;color:var(--ink);margin-top:10px}
   .tagline{font-family:var(--sans);font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--soft);text-align:center;margin-top:12px}
   header{padding-bottom:2rem;border-bottom:.5px solid var(--line)}
 
@@ -100,6 +101,7 @@
 
   <header>
     <div class="monogram">A &amp; M</div>
+    <div class="announce" data-i18n="announce">We're getting married!</div>
     <div class="tagline" data-i18n="tagline">Together with our families</div>
   </header>
 
@@ -156,11 +158,11 @@
     <div class="bar-card hidden" id="barCard">
       <div class="bar-title" data-i18n="barTitle">Help us stock the bar</div>
       <div class="mug-row">
-        <svg width="82" height="104" viewBox="0 0 82 104" role="img" aria-label="Beer mug that fills as the count increases">
-          <rect x="8" y="12" width="50" height="82" rx="6" fill="#FBF8F1" stroke="#7A6A58" stroke-width="2"/>
-          <rect id="mugfill" x="11" y="60" width="44" height="31" rx="4" fill="#C9973F"/>
-          <rect id="mugfoam" x="11" y="54" width="44" height="9" rx="4" fill="#F0E4CC"/>
-          <path d="M58 34 h10 a11 11 0 0 1 0 30 h-10" fill="none" stroke="#7A6A58" stroke-width="2"/>
+        <svg width="94" height="104" viewBox="0 0 94 104" role="img" aria-label="Beer mug that fills as the count increases">
+          <rect x="12" y="12" width="50" height="82" rx="6" fill="#FBF8F1" stroke="#7A6A58" stroke-width="2"/>
+          <rect id="mugfill" x="15" y="60" width="44" height="31" rx="4" fill="#C9973F"/>
+          <rect id="mugfoam" x="15" y="54" width="44" height="9" rx="4" fill="#F0E4CC"/>
+          <path d="M62 34 h10 a11 11 0 0 1 0 30 h-10" fill="none" stroke="#7A6A58" stroke-width="2"/>
         </svg>
         <div style="text-align:center">
           <div id="drinkcount">2</div>
@@ -197,6 +199,7 @@ const SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbwR31qIniYHBvKbq
 const STRINGS = {
   en: {
     tagline:"Together with our families",
+    announce:"We're getting married!",
     dearest:"Dearest",
     caption:"forever starts here",
     when:"When", whenValue:"Sept 18, 2026<br>4:30 – 8:00 pm",
@@ -220,6 +223,7 @@ const STRINGS = {
   },
   es: {
     tagline:"Junto con nuestras familias",
+    announce:"¡Nos casamos!",
     dearest:"Querido/a",
     caption:"aquí empieza el para siempre",
     when:"Cuándo", whenValue:"18 de sept, 2026<br>4:30 – 8:00 pm",
