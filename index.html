@@ -26,7 +26,6 @@
   /* header */
   .monogram{font-family:var(--script);font-size:clamp(46px,10vw,58px);text-align:center;color:#5A4A3F;line-height:1}
   .announce{font-family:var(--serif);font-style:italic;font-size:clamp(17px,3.5vw,20px);text-align:center;color:var(--ink);margin-top:10px}
-  .tagline{font-family:var(--sans);font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--soft);text-align:center;margin-top:12px}
   header{padding-bottom:2rem;border-bottom:.5px solid var(--line)}
 
   /* greeting */
@@ -102,7 +101,6 @@
   <header>
     <div class="monogram">A &amp; M</div>
     <div class="announce" data-i18n="announce">We're getting married!</div>
-    <div class="tagline" data-i18n="tagline">Together with our families</div>
   </header>
 
   <section class="greeting">
@@ -198,10 +196,9 @@ const SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbwR31qIniYHBvKbq
 /* ---------------- I18N ---------------- */
 const STRINGS = {
   en: {
-    tagline:"Together with our families",
     announce:"We're getting married!",
     dearest:"Dearest",
-    caption:"forever starts here",
+    caption:"together forever",
     when:"When", whenValue:"Sept 18, 2026<br>4:30 – 8:00 pm",
     where:"Where", wear:"Wear", wearValue:"Neutral tones",
     join:"Will you join us?",
@@ -222,10 +219,9 @@ const STRINGS = {
     editBtn:"Change my answer"
   },
   es: {
-    tagline:"Junto con nuestras familias",
     announce:"¡Nos casamos!",
     dearest:"Querido/a",
-    caption:"aquí empieza el para siempre",
+    caption:"juntos para siempre",
     when:"Cuándo", whenValue:"18 de sept, 2026<br>4:30 – 8:00 pm",
     where:"Dónde", wear:"Vestimenta", wearValue:"Tonos neutros",
     join:"¿Nos acompañas?",
