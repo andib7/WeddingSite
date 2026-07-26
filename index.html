@@ -70,6 +70,9 @@
   .field label{display:block;font-size:12px;color:var(--soft);margin-bottom:6px}
   .field input{width:100%;background:var(--paper);border:.5px solid var(--line);border-radius:8px;padding:12px;font-size:14px;font-family:var(--sans);color:var(--ink)}
   .field input:focus{outline:2px solid var(--sage);outline-offset:1px}
+  .fam-list{display:flex;flex-direction:column;gap:10px;background:var(--paper);border:.5px solid var(--line);border-radius:8px;padding:14px;margin-top:4px}
+  .fam-list label{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--ink);margin:0;cursor:pointer}
+  .fam-list input[type=checkbox]{width:18px;height:18px;accent-color:var(--sage-dark);cursor:pointer}
 
   /* mug */
   .bar-card{background:var(--card);border-radius:12px;padding:1.4rem;margin-bottom:1.5rem}
@@ -154,9 +157,9 @@
       <p style="font-size:13px;color:var(--soft);font-style:italic;line-height:1.6" data-i18n="noPlusOneNote">We're keeping our wedding small, so this invitation is just for you — we won't be able to accommodate additional guests.</p>
     </div>
 
-    <div class="field hidden" id="dietWrap">
-      <label for="diet" data-i18n="dietLabel">Anything we should know for dinner? (allergies, preferences — for both of you if you're bringing someone)</label>
-      <input type="text" id="diet" autocomplete="off">
+    <div class="field hidden" id="famWrap">
+      <label data-i18n="famLabel">Who's coming? Uncheck anyone who can't make it.</label>
+      <div class="fam-list" id="famList"></div>
     </div>
 
     <div class="field hidden" id="songWrap">
@@ -193,14 +196,11 @@
   <section class="thanks" id="thanksBlock">
     <div class="big" data-i18n="thanksBig">Thank you</div>
     <p id="thanksMsg"></p>
+    <p id="thanksWho" style="font-weight:600"></p>
 
-    <div class="bar-card hidden" id="giftNote" style="text-align:left;margin-top:1.75rem">
-      <div class="bar-title" data-i18n="giftTitle">A little something for the honeymoon</div>
-      <p style="font-size:13px;color:var(--soft);line-height:1.6;margin-bottom:10px;text-align:center" data-i18n="giftIntro">Your presence is truly the only gift we need — but if you'd like to help us kick off our next chapter, here's how:</p>
-      <div style="font-family:var(--sans);font-size:14px;color:var(--ink);line-height:1.8;text-align:center">
-        <div>Venmo: <strong>@andi-barron</strong></div>
-        <div>Zelle: <strong>209-666-4175</strong></div>
-      </div>
+    <div class="bar-card hidden" id="giftNote" style="margin-top:1.75rem">
+      <div class="bar-title" data-i18n="giftTitle">No gifts, please</div>
+      <p style="font-size:13px;color:var(--soft);line-height:1.6;text-align:center" data-i18n="giftIntro">Your presence is the only gift we need — truly. If you'd like to mark the day, nothing would mean more to us than a heartfelt card.</p>
     </div>
 
     <button type="button" class="choice" id="editBtn" style="margin-top:1.4rem;max-width:260px" data-i18n="editBtn">Change my answer</button>
@@ -225,9 +225,12 @@ const STRINGS = {
     join:"Will you join us?",
     accept:"Joyfully accepts", decline:"Regretfully declines",
     noPlusOneNote:"We're keeping our wedding small, so this invitation is just for you — we won't be able to accommodate additional guests.",
-    dietLabel:"Anything we should know for dinner? (allergies, preferences — for both of you if you're bringing someone)",
+    famLabel:"Who's coming? Uncheck anyone who can't make it.",
     songLabel:"A song that'll get you on the dance floor?",
-    barTitle:"Help us stock the bar", drinks:"drinks",
+    barTitle:"Help us stock the bar", drinks:"drinks", drinksEach:"drinks each",
+    dearestFam:"Dearest",
+    errNoOne:"If no one can make it, please use “Regretfully declines” instead.",
+    confirmedWho: list => "Coming to celebrate: " + list,
     quips:["Designated driver energy.","One and done.","A respectable pace.","Now we're talking.","Pacing yourself. Sort of.","We'll keep the tequila coming.","Bold. We admire it.","Should we call you a ride?"],
     send:"Send our RSVP",
     deadline:"Kindly reply by August 20",
@@ -239,8 +242,8 @@ const STRINGS = {
     thanksNo:"We'll miss you, but we're so grateful you let us know. You'll be with us in spirit.",
     thanksReturn:"We already have your RSVP — need to change something?",
     editBtn:"Change my answer",
-    giftTitle:"A little something for the honeymoon",
-    giftIntro:"Your presence is truly the only gift we need — but if you'd like to help us kick off our next chapter, here's how:"
+    giftTitle:"No gifts, please",
+    giftIntro:"Your presence is the only gift we need — truly. If you'd like to mark the day, nothing would mean more to us than a heartfelt card."
   },
   es: {
     announce:"¡Nos casamos!",
@@ -251,9 +254,12 @@ const STRINGS = {
     join:"¿Nos acompañas?",
     accept:"Acepto con gusto", decline:"Lamento no asistir",
     noPlusOneNote:"Nuestra boda será pequeña e íntima, así que esta invitación es solo para ti — no podremos recibir invitados adicionales.",
-    dietLabel:"¿Algo que debamos saber para la cena? (alergias, preferencias — para ambos si vienes acompañado/a)",
+    famLabel:"¿Quiénes asistirán? Desmarca a quien no pueda acompañarnos.",
     songLabel:"¿Qué canción te saca a la pista de baile?",
-    barTitle:"Ayúdanos a surtir el bar", drinks:"bebidas",
+    barTitle:"Ayúdanos a surtir el bar", drinks:"bebidas", drinksEach:"bebidas por persona",
+    dearestFam:"Queridos",
+    errNoOne:"Si nadie puede asistir, por favor usa “Lamento no asistir”.",
+    confirmedWho: list => "Nos acompañarán: " + list,
     quips:["Conductor designado.","Una y ya.","Un ritmo respetable.","Así se habla.","Con calma… más o menos.","Que no falte el tequila.","Qué valiente. Nos gusta.","¿Te pedimos un taxi?"],
     send:"Enviar confirmación",
     deadline:"Por favor confirma antes del 20 de agosto",
@@ -265,8 +271,8 @@ const STRINGS = {
     thanksNo:"Te vamos a extrañar, pero agradecemos mucho que nos avises. Estarás con nosotros en espíritu.",
     thanksReturn:"Ya tenemos tu confirmación — ¿necesitas cambiar algo?",
     editBtn:"Cambiar mi respuesta",
-    giftTitle:"Un pequeño detalle para la luna de miel",
-    giftIntro:"Tu presencia es en verdad el único regalo que necesitamos — pero si quieres ayudarnos a comenzar este nuevo capítulo, puedes hacerlo aquí:"
+    giftTitle:"Sin regalos, por favor",
+    giftIntro:"Tu presencia es el único regalo que necesitamos — de verdad. Si quieres darnos un detalle, nada nos haría más ilusión que una tarjeta."
   }
 };
 
@@ -290,18 +296,37 @@ if (guest) {
   document.getElementById("personalNote").textContent = "";
 }
 
+/* ---------------- FAMILY INVITES ---------------- */
+const isFamily = !!(guest && Array.isArray(guest.members) && guest.members.length > 1);
+if (isFamily) {
+  const famList = document.getElementById("famList");
+  guest.members.forEach(m => {
+    const label = document.createElement("label");
+    const cb = document.createElement("input");
+    cb.type = "checkbox";
+    cb.value = m;
+    cb.checked = true;
+    label.appendChild(cb);
+    label.appendChild(document.createTextNode(m));
+    famList.appendChild(label);
+  });
+  document.querySelector(".dearest").textContent = T.dearestFam;
+  document.querySelector(".drinks-label").textContent = T.drinksEach;
+}
+
 /* ---------------- RSVP CHOICE ---------------- */
 let attending = null;
 const btnYes = document.getElementById("btnYes");
 const btnNo  = document.getElementById("btnNo");
-const revealOnYes = ["dietWrap","songWrap","barCard"];
+const revealOnYes = ["songWrap","barCard"];
 
 function choose(val){
   attending = val;
   btnYes.classList.toggle("selected-yes", val === true);
   btnNo.classList.toggle("selected-no", val === false);
   revealOnYes.forEach(id => document.getElementById(id).classList.toggle("hidden", val !== true));
-  if (!(guest && guest.plusOne)) {
+  if (isFamily) document.getElementById("famWrap").classList.toggle("hidden", val !== true);
+  if (!(guest && (guest.plusOne || isFamily))) {
     document.getElementById("noPlusOneNote").classList.toggle("hidden", val !== true);
   }
   setStatus("","");
@@ -338,13 +363,23 @@ function setStatus(msg, cls){ statusEl.textContent = msg; statusEl.className = "
 submitBtn.addEventListener("click", async () => {
   if (attending === null) { setStatus(T.errPick, "err"); return; }
 
+  let attendees = [];
+  if (attending) {
+    if (isFamily) {
+      attendees = Array.from(document.querySelectorAll("#famList input:checked")).map(cb => cb.value);
+      if (attendees.length === 0) { setStatus(T.errNoOne, "err"); return; }
+    } else {
+      attendees = [guest ? guest.name : "(unknown)"];
+    }
+  }
+
   const payload = {
     slug: slug || "(no-link)",
     name: guest ? guest.name : "(unknown)",
     attending: attending ? "Yes" : "No",
-    dietary: attending ? document.getElementById("diet").value.trim() : "",
+    attendees: attendees.join(", "),
     song: attending ? document.getElementById("song").value.trim() : "",
-    drinks: attending ? n : 0
+    drinks: attending ? n * attendees.length : 0
   };
 
   submitBtn.disabled = true;
@@ -363,6 +398,7 @@ submitBtn.addEventListener("click", async () => {
     }
     try { localStorage.setItem("rsvp-" + slug, attending ? "yes" : "no"); } catch (_) {}
     showThanks(attending ? T.thanksYes : T.thanksNo);
+    document.getElementById("thanksWho").textContent = (attending && isFamily) ? T.confirmedWho(attendees.join(", ")) : "";
     document.getElementById("giftNote").classList.toggle("hidden", !attending);
     window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
   } catch (e) {
