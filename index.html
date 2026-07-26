@@ -129,7 +129,7 @@
       <div class="label" data-i18n="wear">Wear</div>
       <div class="value" data-i18n="wearValue">Neutral tones</div>
       <div class="swatches" aria-label="Dress code colors">
-        <span style="background:#E3D9C0"></span><span style="background:#C4B79C"></span>
+        <span style="background:#C4B79C"></span>
         <span style="background:#A3AE92"></span><span style="background:#B08968"></span>
         <span style="background:#7A6A58"></span><span style="background:#4A3F35"></span>
       </div>
@@ -147,6 +147,10 @@
     <div class="field hidden" id="plusOneField">
       <label for="plusOneName" data-i18n="plusOneLabel">Your plus one's name</label>
       <input type="text" id="plusOneName" autocomplete="off">
+    </div>
+
+    <div class="field hidden" id="noPlusOneNote">
+      <p style="font-size:13px;color:var(--soft);font-style:italic;line-height:1.6" data-i18n="noPlusOneNote">Just so it's clear: we're keeping our wedding small, so this invitation is just for you — we won't be able to accommodate a plus one.</p>
     </div>
 
     <div class="field hidden" id="dietWrap">
@@ -205,6 +209,7 @@ const STRINGS = {
     join:"Will you join us?",
     accept:"Joyfully accepts", decline:"Regretfully declines",
     plusOneLabel:"Your plus one's name",
+    noPlusOneNote:"Just so it's clear: we're keeping our wedding small, so this invitation is just for you — we won't be able to accommodate a plus one.",
     dietLabel:"Anything we should know for dinner? (allergies, preferences — for both of you if you're bringing someone)",
     barTitle:"Help us stock the bar", drinks:"drinks",
     quips:["Designated driver energy.","One and done.","A respectable pace.","Now we're talking.","Pacing yourself. Sort of.","We'll keep the tequila coming.","Bold. We admire it.","Should we call you a ride?"],
@@ -228,6 +233,7 @@ const STRINGS = {
     join:"¿Nos acompañas?",
     accept:"Acepto con gusto", decline:"Lamento no asistir",
     plusOneLabel:"Nombre de tu acompañante",
+    noPlusOneNote:"Para que quede claro: estamos manteniendo nuestra boda pequeña, así que esta invitación es solo para ti — no podremos recibir un acompañante.",
     dietLabel:"¿Algo que debamos saber para la cena? (alergias, preferencias — para ambos si vienes acompañado/a)",
     barTitle:"Ayúdanos a surtir el bar", drinks:"bebidas",
     quips:["Conductor designado.","Una y ya.","Un ritmo respetable.","Así se habla.","Con calma… más o menos.","Que no falte el tequila.","Qué valiente. Nos gusta.","¿Te pedimos un taxi?"],
@@ -276,7 +282,11 @@ function choose(val){
   btnYes.classList.toggle("selected-yes", val === true);
   btnNo.classList.toggle("selected-no", val === false);
   revealOnYes.forEach(id => document.getElementById(id).classList.toggle("hidden", val !== true));
-  if (guest && guest.plusOne) document.getElementById("plusOneField").classList.toggle("hidden", val !== true);
+  if (guest && guest.plusOne) {
+    document.getElementById("plusOneField").classList.toggle("hidden", val !== true);
+  } else {
+    document.getElementById("noPlusOneNote").classList.toggle("hidden", val !== true);
+  }
   setStatus("","");
 }
 btnYes.addEventListener("click", () => choose(true));
