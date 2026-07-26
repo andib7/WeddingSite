@@ -183,6 +183,7 @@
   <section class="thanks" id="thanksBlock">
     <div class="big" data-i18n="thanksBig">Thank you</div>
     <p id="thanksMsg"></p>
+    <button type="button" class="choice" id="editBtn" style="margin-top:1.4rem;max-width:260px" data-i18n="editBtn">Change my answer</button>
   </section>
 
 </div>
@@ -191,7 +192,7 @@
 <script>
 /* ---------------- CONFIG ---------------- */
 // Paste your Apps Script Web App URL between the quotes once deployed:
-const SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbxwtOGhQGTkUDyDGk5Q7Bld3oBZlcqV4dKNkBQ99H08Mn2GufhW_Mbqo6DKXm5m7uBR/exec";
+const SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbwR31qIniYHBvKbq9FY_hLgQHO_-No_y4dqEBLCKietJn2nahFgKBltF-sfgUS-WrGf/exec";
 
 /* ---------------- I18N ---------------- */
 const STRINGS = {
@@ -214,7 +215,9 @@ const STRINGS = {
     errNet:"That didn't go through — please try again in a moment.",
     thanksBig:"Thank you",
     thanksYes:"We can't wait to celebrate with you on September 19th. See you at Angelica's!",
-    thanksNo:"We'll miss you, but we're so grateful you let us know. You'll be with us in spirit."
+    thanksNo:"We'll miss you, but we're so grateful you let us know. You'll be with us in spirit.",
+    thanksReturn:"We already have your RSVP — need to change something?",
+    editBtn:"Change my answer"
   },
   es: {
     tagline:"Junto con nuestras familias",
@@ -235,7 +238,9 @@ const STRINGS = {
     errNet:"No se envió — inténtalo de nuevo en un momento.",
     thanksBig:"Gracias",
     thanksYes:"No podemos esperar a celebrar contigo el 19 de septiembre. ¡Nos vemos en Angelica's!",
-    thanksNo:"Te vamos a extrañar, pero agradecemos mucho que nos avises. Estarás con nosotros en espíritu."
+    thanksNo:"Te vamos a extrañar, pero agradecemos mucho que nos avises. Estarás con nosotros en espíritu.",
+    thanksReturn:"Ya tenemos tu RSVP — ¿necesitas cambiar algo?",
+    editBtn:"Cambiar mi respuesta"
   }
 };
 
@@ -329,15 +334,33 @@ submitBtn.addEventListener("click", async () => {
     } else {
       console.warn("SHEET_ENDPOINT not set — RSVP logged locally:", payload);
     }
-    document.getElementById("rsvpForm").style.display = "none";
-    document.getElementById("thanksMsg").textContent = attending ? T.thanksYes : T.thanksNo;
-    document.getElementById("thanksBlock").style.display = "block";
+    try { localStorage.setItem("rsvp-" + slug, attending ? "yes" : "no"); } catch (_) {}
+    showThanks(attending ? T.thanksYes : T.thanksNo);
     window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
   } catch (e) {
     submitBtn.disabled = false;
     setStatus(T.errNet, "err");
   }
 });
+
+/* ---------------- ALREADY-SUBMITTED / EDIT ---------------- */
+function showThanks(msg){
+  document.getElementById("rsvpForm").style.display = "none";
+  document.getElementById("thanksMsg").textContent = msg;
+  document.getElementById("thanksBlock").style.display = "block";
+}
+document.getElementById("editBtn").addEventListener("click", () => {
+  document.getElementById("thanksBlock").style.display = "none";
+  document.getElementById("rsvpForm").style.display = "";
+  submitBtn.disabled = false;
+  setStatus("","");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+// If this browser already sent an RSVP for this link, greet them with the
+// thank-you screen instead of a blank form (they can still change it).
+try {
+  if (slug && localStorage.getItem("rsvp-" + slug)) showThanks(T.thanksReturn);
+} catch (_) {}
 </script>
 </body>
 </html>

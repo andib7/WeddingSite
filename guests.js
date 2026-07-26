@@ -14,11 +14,17 @@
 const GUESTS = {
   "maxi": {
     name: "Maxi",
-    lang: "es",
-    plusOne: true,
+    lang: "en",
+    plusOne: false,
     note: "Every family has that one nephew who makes the party better just by showing up. That's you. Come celebrate with us."
   },
 
+  "mariel": {
+    name: "Mariel",
+    lang: "en",
+    plusOne: false,
+    note: "Stop being mean to me"
+  },
   // ---- Add your real guests below. Examples: ----
 
   // "tia-rosa": {
