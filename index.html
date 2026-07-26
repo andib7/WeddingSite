@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>A &amp; M — September 19, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F5F0E6; --card:#EDE6D8; --paper:#FBF8F1;
+    --line:#C4B79C; --sage:#A3AE92; --sage-dark:#3A4030;
+    --caramel:#C9973F; --foam:#F0E4CC;
+    --tan:#B08968; --mocha:#7A6A58; --ink:#4A3F35;
+    --soft:#8A7C6A; --faint:#A89880;
+    --serif:'Cormorant Garamond',Georgia,serif;
+    --script:'Great Vibes',cursive;
+    --sans:'Helvetica Neue',Helvetica,Arial,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--cream);color:var(--ink);font-family:var(--serif);-webkit-font-smoothing:antialiased}
+  .page{max-width:640px;margin:0 auto;padding:3rem 1.5rem 4rem}
+
+  /* header */
+  .monogram{font-family:var(--script);font-size:clamp(46px,10vw,58px);text-align:center;color:#5A4A3F;line-height:1}
+  .tagline{font-family:var(--sans);font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--soft);text-align:center;margin-top:12px}
+  header{padding-bottom:2rem;border-bottom:.5px solid var(--line)}
+
+  /* greeting */
+  .greeting{text-align:center;padding:2.25rem 0 1.75rem}
+  .dearest{font-family:var(--sans);font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--soft);margin-bottom:10px}
+  .guest-name{font-size:clamp(28px,6vw,36px);line-height:1.3}
+  .personal-note{max-width:430px;margin:16px auto 0;font-size:18px;line-height:1.8;color:#5A4A3F;font-style:italic}
+
+  /* photo */
+  .photo-wrap{display:flex;justify-content:center;margin:.5rem 0 2.25rem}
+  .polaroid{background:var(--paper);padding:12px 12px 22px;border-radius:6px;box-shadow:0 8px 24px rgba(74,63,53,.18);transform:rotate(-1.2deg);transition:transform .4s ease}
+  .polaroid:hover{transform:rotate(0deg) scale(1.01)}
+  .polaroid img{display:block;width:min(64vw,280px);border-radius:2px}
+  .polaroid figcaption{text-align:center;font-family:var(--script);font-size:21px;color:var(--soft);margin-top:12px}
+
+  /* details */
+  .details{background:var(--card);border-radius:12px;padding:1.4rem 1rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;text-align:center;font-family:var(--sans)}
+  .details .label{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--soft)}
+  .details .value{font-size:14px;color:var(--ink);margin-top:6px;line-height:1.5}
+  .details > div:nth-child(2){border-left:.5px solid var(--line);border-right:.5px solid var(--line)}
+  .swatches{display:flex;gap:4px;justify-content:center;margin-top:8px}
+  .swatches span{width:16px;height:16px;border-radius:4px;display:inline-block}
+  .maps-link{color:var(--mocha);text-decoration:underline;text-underline-offset:2px}
+
+  /* rsvp */
+  .rsvp{border-top:.5px solid var(--line);margin-top:2.25rem;padding-top:2rem;font-family:var(--sans)}
+  .rsvp-title{text-align:center;font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--soft);margin-bottom:1.4rem}
+  .choices{display:flex;gap:10px;margin-bottom:1.5rem}
+  .choice{flex:1;text-align:center;padding:14px;border-radius:8px;border:.5px solid var(--line);color:var(--soft);font-size:14px;background:transparent;cursor:pointer;font-family:var(--sans);transition:all .2s}
+  .choice:hover{border-color:var(--mocha)}
+  .choice.selected-yes{background:var(--sage);border-color:var(--sage);color:var(--sage-dark)}
+  .choice.selected-no{background:var(--mocha);border-color:var(--mocha);color:var(--cream)}
+  .choice:focus-visible,.stepper button:focus-visible,.submit:focus-visible{outline:2px solid var(--mocha);outline-offset:2px}
+
+  .field{margin-bottom:1.4rem}
+  .field label{display:block;font-size:12px;color:var(--soft);margin-bottom:6px}
+  .field input{width:100%;background:var(--paper);border:.5px solid var(--line);border-radius:8px;padding:12px;font-size:14px;font-family:var(--sans);color:var(--ink)}
+  .field input:focus{outline:2px solid var(--sage);outline-offset:1px}
+
+  /* mug */
+  .bar-card{background:var(--card);border-radius:12px;padding:1.4rem;margin-bottom:1.5rem}
+  .bar-title{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--soft);margin-bottom:16px;text-align:center}
+  .mug-row{display:flex;align-items:center;justify-content:center;gap:28px}
+  #drinkcount{font-size:40px;color:var(--ink);font-family:var(--serif)}
+  .drinks-label{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--soft);margin-bottom:12px}
+  .stepper{display:flex;gap:8px;justify-content:center}
+  .stepper button{width:40px;height:38px;border-radius:8px;border:.5px solid var(--mocha);background:transparent;color:var(--ink);font-size:18px;cursor:pointer}
+  .stepper button:active{background:var(--paper)}
+  #mugfill{transition:y .45s cubic-bezier(.34,1.3,.5,1),height .45s cubic-bezier(.34,1.3,.5,1)}
+  #mugfoam{transition:y .45s cubic-bezier(.34,1.3,.5,1),opacity .3s}
+  #drinkquip{text-align:center;font-size:12px;color:var(--soft);margin-top:14px;font-style:italic;min-height:15px}
+
+  .submit{display:block;width:100%;text-align:center;padding:15px;border-radius:8px;background:var(--ink);color:var(--cream);font-size:14px;letter-spacing:1px;border:none;cursor:pointer;font-family:var(--sans)}
+  .submit:disabled{opacity:.55;cursor:default}
+  .deadline{text-align:center;font-size:11px;color:var(--faint);margin-top:12px}
+  .status{text-align:center;font-size:13px;margin-top:14px;min-height:16px}
+  .status.ok{color:var(--sage-dark)}
+  .status.err{color:#8a4a3a}
+
+  .thanks{display:none;text-align:center;padding:2.5rem 0 1rem}
+  .thanks .big{font-family:var(--script);font-size:40px;color:#5A4A3F}
+  .thanks p{font-family:var(--sans);font-size:14px;color:var(--soft);margin-top:12px;line-height:1.7}
+
+  .hidden{display:none!important}
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none!important}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="monogram">A &amp; M</div>
+    <div class="tagline" data-i18n="tagline">Together with our families</div>
+  </header>
+
+  <section class="greeting">
+    <div class="dearest" data-i18n="dearest">Dearest</div>
+    <h1 class="guest-name" id="guestName">Friend</h1>
+    <p class="personal-note" id="personalNote"></p>
+  </section>
+
+  <figure class="photo-wrap">
+    <div class="polaroid">
+      <img src="engagement.jpg" alt="Andi and Max embracing on the beach, white roses and ocean waves behind them">
+      <figcaption data-i18n="caption">forever starts here</figcaption>
+    </div>
+  </figure>
+
+  <section class="details">
+    <div>
+      <div class="label" data-i18n="when">When</div>
+      <div class="value" data-i18n="whenValue">Sept 19, 2026<br>4:30 – 8:00 pm</div>
+    </div>
+    <div>
+      <div class="label" data-i18n="where">Where</div>
+      <div class="value"><a class="maps-link" href="https://maps.google.com/?q=Angelicas+Redwood+City" target="_blank" rel="noopener">Angelica's</a><br data-i18n-skip>Redwood City</div>
+    </div>
+    <div>
+      <div class="label" data-i18n="wear">Wear</div>
+      <div class="value" data-i18n="wearValue">Neutral tones</div>
+      <div class="swatches" aria-label="Dress code colors">
+        <span style="background:#E3D9C0"></span><span style="background:#C4B79C"></span>
+        <span style="background:#A3AE92"></span><span style="background:#B08968"></span>
+        <span style="background:#7A6A58"></span><span style="background:#4A3F35"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="rsvp" id="rsvpForm">
+    <div class="rsvp-title" data-i18n="join">Will you join us?</div>
+
+    <div class="choices" role="radiogroup" aria-label="RSVP">
+      <button type="button" class="choice" id="btnYes" data-i18n="accept">Joyfully accepts</button>
+      <button type="button" class="choice" id="btnNo" data-i18n="decline">Regretfully declines</button>
+    </div>
+
+    <div class="field hidden" id="plusOneField">
+      <label for="plusOneName" data-i18n="plusOneLabel">Your plus one's name</label>
+      <input type="text" id="plusOneName" autocomplete="off">
+    </div>
+
+    <div class="field hidden" id="dietWrap">
+      <label for="diet" data-i18n="dietLabel">Anything we should know for dinner? (allergies, preferences — for both of you if you're bringing someone)</label>
+      <input type="text" id="diet" autocomplete="off">
+    </div>
+
+    <div class="bar-card hidden" id="barCard">
+      <div class="bar-title" data-i18n="barTitle">Help us stock the bar</div>
+      <div class="mug-row">
+        <svg width="82" height="104" viewBox="0 0 82 104" role="img" aria-label="Beer mug that fills as the count increases">
+          <rect x="8" y="12" width="50" height="82" rx="6" fill="#FBF8F1" stroke="#7A6A58" stroke-width="2"/>
+          <rect id="mugfill" x="11" y="60" width="44" height="31" rx="4" fill="#C9973F"/>
+          <rect id="mugfoam" x="11" y="54" width="44" height="9" rx="4" fill="#F0E4CC"/>
+          <path d="M58 34 h10 a11 11 0 0 1 0 30 h-10" fill="none" stroke="#7A6A58" stroke-width="2"/>
+        </svg>
+        <div style="text-align:center">
+          <div id="drinkcount">2</div>
+          <div class="drinks-label" data-i18n="drinks">drinks</div>
+          <div class="stepper">
+            <button type="button" id="minus" aria-label="Fewer drinks">−</button>
+            <button type="button" id="plus" aria-label="More drinks">+</button>
+          </div>
+        </div>
+      </div>
+      <div id="drinkquip"></div>
+    </div>
+
+    <button type="button" class="submit" id="submitBtn" data-i18n="send">Send our RSVP</button>
+    <div class="deadline" data-i18n="deadline">Kindly reply by September 1</div>
+    <div class="status" id="status" role="status"></div>
+  </section>
+
+  <section class="thanks" id="thanksBlock">
+    <div class="big" data-i18n="thanksBig">Thank you</div>
+    <p id="thanksMsg"></p>
+  </section>
+
+</div>
+
+<script src="guests.js"></script>
+<script>
+/* ---------------- CONFIG ---------------- */
+// Paste your Apps Script Web App URL between the quotes once deployed:
+const SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbxwtOGhQGTkUDyDGk5Q7Bld3oBZlcqV4dKNkBQ99H08Mn2GufhW_Mbqo6DKXm5m7uBR/exec";
+
+/* ---------------- I18N ---------------- */
+const STRINGS = {
+  en: {
+    tagline:"Together with our families",
+    dearest:"Dearest",
+    caption:"forever starts here",
+    when:"When", whenValue:"Sept 19, 2026<br>4:30 – 8:00 pm",
+    where:"Where", wear:"Wear", wearValue:"Neutral tones",
+    join:"Will you join us?",
+    accept:"Joyfully accepts", decline:"Regretfully declines",
+    plusOneLabel:"Your plus one's name",
+    dietLabel:"Anything we should know for dinner? (allergies, preferences — for both of you if you're bringing someone)",
+    barTitle:"Help us stock the bar", drinks:"drinks",
+    quips:["Designated driver energy.","One and done.","A respectable pace.","Now we're talking.","Pacing yourself. Sort of.","We'll keep the tequila coming.","Bold. We admire it.","Should we call you a ride?"],
+    send:"Send our RSVP",
+    deadline:"Kindly reply by September 1",
+    sending:"Sending…",
+    errPick:"Please choose accept or decline first.",
+    errNet:"That didn't go through — please try again in a moment.",
+    thanksBig:"Thank you",
+    thanksYes:"We can't wait to celebrate with you on September 19th. See you at Angelica's!",
+    thanksNo:"We'll miss you, but we're so grateful you let us know. You'll be with us in spirit."
+  },
+  es: {
+    tagline:"Junto con nuestras familias",
+    dearest:"Querido/a",
+    caption:"aquí empieza el para siempre",
+    when:"Cuándo", whenValue:"19 de sept, 2026<br>4:30 – 8:00 pm",
+    where:"Dónde", wear:"Vestimenta", wearValue:"Tonos neutros",
+    join:"¿Nos acompañas?",
+    accept:"Acepto con gusto", decline:"Lamento no asistir",
+    plusOneLabel:"Nombre de tu acompañante",
+    dietLabel:"¿Algo que debamos saber para la cena? (alergias, preferencias — para ambos si vienes acompañado/a)",
+    barTitle:"Ayúdanos a surtir el bar", drinks:"bebidas",
+    quips:["Conductor designado.","Una y ya.","Un ritmo respetable.","Así se habla.","Con calma… más o menos.","Que no falte el tequila.","Qué valiente. Nos gusta.","¿Te pedimos un taxi?"],
+    send:"Enviar RSVP",
+    deadline:"Por favor confirma antes del 1 de septiembre",
+    sending:"Enviando…",
+    errPick:"Primero elige si aceptas o no.",
+    errNet:"No se envió — inténtalo de nuevo en un momento.",
+    thanksBig:"Gracias",
+    thanksYes:"No podemos esperar a celebrar contigo el 19 de septiembre. ¡Nos vemos en Angelica's!",
+    thanksNo:"Te vamos a extrañar, pero agradecemos mucho que nos avises. Estarás con nosotros en espíritu."
+  }
+};
+
+/* ---------------- GUEST LOOKUP ---------------- */
+const slug = new URLSearchParams(location.search).get("g") || "";
+const guest = (typeof GUESTS !== "undefined" && GUESTS[slug]) || null;
+const lang = guest ? guest.lang : "en";
+const T = STRINGS[lang] || STRINGS.en;
+document.documentElement.lang = lang;
+
+document.querySelectorAll("[data-i18n]").forEach(el => {
+  const key = el.getAttribute("data-i18n");
+  if (T[key]) el.innerHTML = T[key];
+});
+
+if (guest) {
+  document.getElementById("guestName").textContent = guest.name;
+  document.getElementById("personalNote").textContent = guest.note ? `“${guest.note}”` : "";
+  if (guest.plusOne) document.getElementById("plusOneField").classList.remove("hidden");
+} else {
+  document.getElementById("guestName").textContent = lang === "es" ? "Querido invitado" : "Dear guest";
+  document.getElementById("personalNote").textContent = "";
+}
+
+/* ---------------- RSVP CHOICE ---------------- */
+let attending = null;
+const btnYes = document.getElementById("btnYes");
+const btnNo  = document.getElementById("btnNo");
+const revealOnYes = ["dietWrap","barCard"];
+
+function choose(val){
+  attending = val;
+  btnYes.classList.toggle("selected-yes", val === true);
+  btnNo.classList.toggle("selected-no", val === false);
+  revealOnYes.forEach(id => document.getElementById(id).classList.toggle("hidden", val !== true));
+  if (guest && guest.plusOne) document.getElementById("plusOneField").classList.toggle("hidden", val !== true);
+  setStatus("","");
+}
+btnYes.addEventListener("click", () => choose(true));
+btnNo .addEventListener("click", () => choose(false));
+
+/* ---------------- BEER MUG ---------------- */
+let n = 2;
+const MAX = 8;
+const fill = document.getElementById("mugfill"),
+      foam = document.getElementById("mugfoam"),
+      count = document.getElementById("drinkcount"),
+      quip = document.getElementById("drinkquip");
+
+function renderMug(){
+  count.textContent = n;
+  const h = Math.round(Math.min(n, MAX) / MAX * 79);
+  fill.setAttribute("y", 91 - h);
+  fill.setAttribute("height", Math.max(h, 1));
+  foam.setAttribute("y", Math.max(91 - h - 6, 12));
+  foam.style.opacity = n === 0 ? 0 : 1;
+  quip.textContent = T.quips[Math.min(n, T.quips.length - 1)];
+}
+document.getElementById("plus").addEventListener("click", () => { if (n < MAX) { n++; renderMug(); } });
+document.getElementById("minus").addEventListener("click", () => { if (n > 0) { n--; renderMug(); } });
+renderMug();
+
+/* ---------------- SUBMIT ---------------- */
+const submitBtn = document.getElementById("submitBtn");
+const statusEl = document.getElementById("status");
+function setStatus(msg, cls){ statusEl.textContent = msg; statusEl.className = "status " + cls; }
+
+submitBtn.addEventListener("click", async () => {
+  if (attending === null) { setStatus(T.errPick, "err"); return; }
+
+  const payload = {
+    slug: slug || "(no-link)",
+    name: guest ? guest.name : "(unknown)",
+    attending: attending ? "Yes" : "No",
+    plusOneName: (guest && guest.plusOne && attending) ? document.getElementById("plusOneName").value.trim() : "",
+    dietary: attending ? document.getElementById("diet").value.trim() : "",
+    drinks: attending ? n : 0
+  };
+
+  submitBtn.disabled = true;
+  setStatus(T.sending, "ok");
+
+  try {
+    if (SHEET_ENDPOINT) {
+      await fetch(SHEET_ENDPOINT, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(payload)
+      });
+    } else {
+      console.warn("SHEET_ENDPOINT not set — RSVP logged locally:", payload);
+    }
+    document.getElementById("rsvpForm").style.display = "none";
+    document.getElementById("thanksMsg").textContent = attending ? T.thanksYes : T.thanksNo;
+    document.getElementById("thanksBlock").style.display = "block";
+    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+  } catch (e) {
+    submitBtn.disabled = false;
+    setStatus(T.errNet, "err");
+  }
+});
+</script>
+</body>
+</html>
