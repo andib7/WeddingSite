@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex">
 <title>A &amp; M — September 18, 2026</title>
+<meta property="og:type" content="website">
+<meta property="og:title" content="A &amp; M — We're Getting Married!">
+<meta property="og:description" content="Join us September 18, 2026 in Redwood City, CA.">
+<meta property="og:image" content="https://andib7.github.io/wedding-site/engagement.jpg">
+<meta property="og:url" content="https://andib7.github.io/wedding-site/">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
@@ -112,7 +118,7 @@
   <figure class="photo-wrap">
     <div class="polaroid">
       <img src="engagement.jpg" alt="Andi and Max embracing on the beach, white roses and ocean waves behind them">
-      <figcaption data-i18n="caption">forever starts here</figcaption>
+      <figcaption data-i18n="caption">together forever</figcaption>
     </div>
   </figure>
 
@@ -153,6 +159,11 @@
       <input type="text" id="diet" autocomplete="off">
     </div>
 
+    <div class="field hidden" id="songWrap">
+      <label for="song" data-i18n="songLabel">A song that'll get you on the dance floor?</label>
+      <input type="text" id="song" autocomplete="off">
+    </div>
+
     <div class="bar-card hidden" id="barCard">
       <div class="bar-title" data-i18n="barTitle">Help us stock the bar</div>
       <div class="mug-row">
@@ -182,6 +193,16 @@
   <section class="thanks" id="thanksBlock">
     <div class="big" data-i18n="thanksBig">Thank you</div>
     <p id="thanksMsg"></p>
+
+    <div class="bar-card hidden" id="giftNote" style="text-align:left;margin-top:1.75rem">
+      <div class="bar-title" data-i18n="giftTitle">A little something for the honeymoon</div>
+      <p style="font-size:13px;color:var(--soft);line-height:1.6;margin-bottom:10px;text-align:center" data-i18n="giftIntro">Your presence is truly the only gift we need — but if you'd like to help us kick off our next chapter, here's how:</p>
+      <div style="font-family:var(--sans);font-size:14px;color:var(--ink);line-height:1.8;text-align:center">
+        <div>Venmo: <strong>@andi-barron</strong></div>
+        <div>Zelle: <strong>209-666-4175</strong></div>
+      </div>
+    </div>
+
     <button type="button" class="choice" id="editBtn" style="margin-top:1.4rem;max-width:260px" data-i18n="editBtn">Change my answer</button>
   </section>
 
@@ -205,6 +226,7 @@ const STRINGS = {
     accept:"Joyfully accepts", decline:"Regretfully declines",
     noPlusOneNote:"We're keeping our wedding small, so this invitation is just for you — we won't be able to accommodate additional guests.",
     dietLabel:"Anything we should know for dinner? (allergies, preferences — for both of you if you're bringing someone)",
+    songLabel:"A song that'll get you on the dance floor?",
     barTitle:"Help us stock the bar", drinks:"drinks",
     quips:["Designated driver energy.","One and done.","A respectable pace.","Now we're talking.","Pacing yourself. Sort of.","We'll keep the tequila coming.","Bold. We admire it.","Should we call you a ride?"],
     send:"Send our RSVP",
@@ -216,7 +238,9 @@ const STRINGS = {
     thanksYes:"We can't wait to celebrate with you on September 18th. See you at Angelica's!",
     thanksNo:"We'll miss you, but we're so grateful you let us know. You'll be with us in spirit.",
     thanksReturn:"We already have your RSVP — need to change something?",
-    editBtn:"Change my answer"
+    editBtn:"Change my answer",
+    giftTitle:"A little something for the honeymoon",
+    giftIntro:"Your presence is truly the only gift we need — but if you'd like to help us kick off our next chapter, here's how:"
   },
   es: {
     announce:"¡Nos casamos!",
@@ -226,11 +250,12 @@ const STRINGS = {
     where:"Dónde", wear:"Vestimenta", wearValue:"Tonos neutros",
     join:"¿Nos acompañas?",
     accept:"Acepto con gusto", decline:"Lamento no asistir",
-    noPlusOneNote:"Estamos manteniendo nuestra boda pequeña, así que esta invitación es solo para ti — no podremos recibir invitados adicionales.",
+    noPlusOneNote:"Nuestra boda será pequeña e íntima, así que esta invitación es solo para ti — no podremos recibir invitados adicionales.",
     dietLabel:"¿Algo que debamos saber para la cena? (alergias, preferencias — para ambos si vienes acompañado/a)",
+    songLabel:"¿Qué canción te saca a la pista de baile?",
     barTitle:"Ayúdanos a surtir el bar", drinks:"bebidas",
     quips:["Conductor designado.","Una y ya.","Un ritmo respetable.","Así se habla.","Con calma… más o menos.","Que no falte el tequila.","Qué valiente. Nos gusta.","¿Te pedimos un taxi?"],
-    send:"Enviar RSVP",
+    send:"Enviar confirmación",
     deadline:"Por favor confirma antes del 20 de agosto",
     sending:"Enviando…",
     errPick:"Primero elige si aceptas o no.",
@@ -238,8 +263,10 @@ const STRINGS = {
     thanksBig:"Gracias",
     thanksYes:"No podemos esperar a celebrar contigo el 18 de septiembre. ¡Nos vemos en Angelica's!",
     thanksNo:"Te vamos a extrañar, pero agradecemos mucho que nos avises. Estarás con nosotros en espíritu.",
-    thanksReturn:"Ya tenemos tu RSVP — ¿necesitas cambiar algo?",
-    editBtn:"Cambiar mi respuesta"
+    thanksReturn:"Ya tenemos tu confirmación — ¿necesitas cambiar algo?",
+    editBtn:"Cambiar mi respuesta",
+    giftTitle:"Un pequeño detalle para la luna de miel",
+    giftIntro:"Tu presencia es en verdad el único regalo que necesitamos — pero si quieres ayudarnos a comenzar este nuevo capítulo, puedes hacerlo aquí:"
   }
 };
 
@@ -267,7 +294,7 @@ if (guest) {
 let attending = null;
 const btnYes = document.getElementById("btnYes");
 const btnNo  = document.getElementById("btnNo");
-const revealOnYes = ["dietWrap","barCard"];
+const revealOnYes = ["dietWrap","songWrap","barCard"];
 
 function choose(val){
   attending = val;
@@ -316,6 +343,7 @@ submitBtn.addEventListener("click", async () => {
     name: guest ? guest.name : "(unknown)",
     attending: attending ? "Yes" : "No",
     dietary: attending ? document.getElementById("diet").value.trim() : "",
+    song: attending ? document.getElementById("song").value.trim() : "",
     drinks: attending ? n : 0
   };
 
@@ -335,6 +363,7 @@ submitBtn.addEventListener("click", async () => {
     }
     try { localStorage.setItem("rsvp-" + slug, attending ? "yes" : "no"); } catch (_) {}
     showThanks(attending ? T.thanksYes : T.thanksNo);
+    document.getElementById("giftNote").classList.toggle("hidden", !attending);
     window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
   } catch (e) {
     submitBtn.disabled = false;
@@ -358,7 +387,11 @@ document.getElementById("editBtn").addEventListener("click", () => {
 // If this browser already sent an RSVP for this link, greet them with the
 // thank-you screen instead of a blank form (they can still change it).
 try {
-  if (slug && localStorage.getItem("rsvp-" + slug)) showThanks(T.thanksReturn);
+  const storedRsvp = slug && localStorage.getItem("rsvp-" + slug);
+  if (storedRsvp) {
+    showThanks(T.thanksReturn);
+    document.getElementById("giftNote").classList.toggle("hidden", storedRsvp !== "yes");
+  }
 } catch (_) {}
 </script>
 </body>

@@ -4,7 +4,7 @@
  * SETUP (one time, ~5 minutes):
  * 1. Create a Google Sheet named "Wedding RSVPs".
  * 2. In row 1, add headers exactly:
- *    Timestamp | Slug | Name | Attending | PlusOneName | Dietary | Drinks
+ *    Timestamp | Slug | Name | Attending | Dietary | Song | Drinks
  * 3. Extensions -> Apps Script. Delete any starter code, paste this file.
  * 4. Deploy -> New deployment -> type: Web app
  *      - Execute as: Me
@@ -29,8 +29,8 @@ function doPost(e) {
       data.slug || "",
       data.name || "",
       data.attending || "",
-      data.plusOneName || "",
       data.dietary || "",
+      data.song || "",
       Number(data.drinks) || 0
     ]);
 
