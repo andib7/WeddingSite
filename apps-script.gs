@@ -4,7 +4,7 @@
  * SETUP (one time, ~5 minutes):
  * 1. Create a Google Sheet named "Wedding RSVPs".
  * 2. In row 1, add headers exactly:
- *    Timestamp | Slug | Name | Attending | Attendees | Song | Drinks
+ *    Timestamp | Slug | Name | Attending | Headcount | Attendees | Not Coming | Song | Drinks
  * 3. Extensions -> Apps Script. Delete any starter code, paste this file.
  * 4. Deploy -> New deployment -> type: Web app
  *      - Execute as: Me
@@ -12,8 +12,10 @@
  * 5. Copy the Web App URL (ends in /exec) and paste it into
  *    SHEET_ENDPOINT at the top of the <script> in index.html.
  *
- * Every RSVP submission appends one row to the sheet.
- * Drink total for the bar: put  =SUM(G2:G)  in any empty cell.
+ * Each guest (slug) gets ONE row — re-submitting updates it in place,
+ * so the sheet always shows everyone's latest answer.
+ * Total headcount:            =SUM(E2:E)
+ * Drink total for the bar:    =SUM(I2:I)
  */
 
 function doPost(e) {
@@ -24,15 +26,30 @@ function doPost(e) {
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
     var data = JSON.parse(e.postData.contents);
 
-    sheet.appendRow([
+    var row = [
       new Date(),
       data.slug || "",
       data.name || "",
       data.attending || "",
+      Number(data.headcount) || 0,
       data.attendees || "",
+      data.notComing || "",
       data.song || "",
       Number(data.drinks) || 0
-    ]);
+    ];
+
+    // If this guest (slug) already RSVP'd, update their row; otherwise add one.
+    // Latest answer always wins — no duplicate rows.
+    var slugs = sheet.getRange(2, 2, Math.max(sheet.getLastRow() - 1, 1), 1).getValues();
+    var found = -1;
+    for (var i = 0; i < slugs.length; i++) {
+      if (slugs[i][0] && slugs[i][0] === row[1]) { found = i + 2; break; }
+    }
+    if (found > 0 && row[1] && row[1] !== "(no-link)") {
+      sheet.getRange(found, 1, 1, row.length).setValues([row]);
+    } else {
+      sheet.appendRow(row);
+    }
 
     return ContentService
       .createTextOutput(JSON.stringify({ ok: true }))

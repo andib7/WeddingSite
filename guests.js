@@ -28,12 +28,12 @@ const GUESTS = {
   },
   // ---- Add your real guests below. Examples: ----
 
-  // "lopez-family": {
-  //   name: "The Lopez Family",
-  //   lang: "en",
-  //   members: ["Juan", "Rosa", "Carlos"],
-  //   note: "We can't imagine the day without all of you."
-  // },
+  "lopez-family": {
+     name: "The Lopez Family",
+     lang: "es",
+     members: ["Juan", "Rosa", "Carlos"],
+     note: "We can't imagine the day without all of you."
+  },
 
   // "familia-garcia": {
   //   name: "Familia García",
