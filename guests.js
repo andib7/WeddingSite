@@ -1,8 +1,8 @@
 /* ============================================================
    GUEST LIST — this is the only file you need to edit.
    Each guest gets a unique link:
-     https://andib7.github.io/wedding-site/?g=SLUG
-   e.g.  https://andib7.github.io/wedding-site/?g=maxi
+     https://andib7.github.io/WeddingSite/?g=SLUG
+   e.g.  https://andib7.github.io/WeddingSite/?g=maxi
 
    Fields:
      name     — shown at the top of their invite
