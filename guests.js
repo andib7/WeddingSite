@@ -58,21 +58,21 @@ const GUESTS = {
     name: "Leslie & Raul",
     lang: "en",
     members: ["Leslie", "Raul"],
-    note: "Leslie, growing up with you is how I learned what family actually means. Getting to celebrate this with you — and with the little one on the way — makes it even better. Raul, you're one of us now, no take-backs."
+    note: "Hermana, I love you. Getting to celebrate this with you — and with the little one on the way — makes it even better. Raul, you're one of us now, no take-backs."
   },
 
   "pablo-irma-luna": {
     name: "Pablo, Irma y Luna",
     lang: "es",
     members: ["Pablo", "Irma", "Luna"],
-    note: "Nos encantaría que nos acompañaran en este día. Sería muy especial tenerlos ahí con nosotros."
+    note: "Papá, me encantaría tenerte ahí ese día. No siempre fue fácil el camino, pero sigues siendo mi papá y te quiero. Sería muy especial tenerlos a ti, a Irma y a Luna a mi lado."
   },
 
   "maria-primas": {
     name: "Maria y las primas",
     lang: "es",
     members: ["Maria", "Estefania", "Rocio", "Monica"],
-    note: "Tía, gracias por todas las veces que me cuidaste — hiciste más por mí de lo que probablemente sabes. Y con ustedes tres crecí y tengo los mejores recuerdos. No me imagino este día sin tenerlas ahí."
+    note: "Tía, gracias por todas las veces que me cuidabas. Con ti y mis primas crecí y tengo los mejores recuerdos. No me imagino este día sin tenerlas ahí."
   },
 
   "olga-eliseo": {
@@ -93,7 +93,7 @@ const GUESTS = {
     name: "Henry & Blanca",
     lang: "en",
     members: ["Henry", "Blanca"],
-    note: "Henry, half my childhood happened at your house — the sleepovers, the games, all of it. It wouldn't feel right doing this without you there. Blanca, we're looking forward to finally spending some real time with you. Give Enzo a hug from us."
+    note: "Henry, half my childhood happened at your house — the sleepovers, the games, all of it. It wouldn't feel right doing this without you there. Give Enzo a hug from us."
   },
 
   "katherine-maxi": {
@@ -108,19 +108,19 @@ const GUESTS = {
   "migy": {
     name: "Miguel",
     lang: "en",
-    note: "Migy, if we were doing a wedding party, you'd be standing right next to me — that was never a question. We've somehow done everything else together, so it'd be strange to do the biggest one without you."
+    note: "Migy, my twin, of course if I am getting married you'd be standing right next to me. We've somehow done everything else together, so it'd be strange to do the biggest one without you."
   },
 
   "jc": {
     name: "Jc",
     lang: "en",
-    note: "Jc, you're the reason I know what an E36 is, and the reason a concerning amount of my money has gone to BMWs. Come celebrate with us — and yes, walang forever? Come watch us prove that wrong."
+    note: "Jc, my E36 brother — we Pop Out at Angelica's on September 18th, and it wouldn't feel right without you there. No Evil J0rdan antics on the dance floor, just an Olympian effort to keep up with the open bar. Dis 1 Got It, twin."
   },
 
   "leech": {
     name: "Ulices",
     lang: "en",
-    note: "Leech, we've spent more hours on the Rift together than either of us should admit out loud. Come celebrate with us — this one's not ranked, I promise."
+    note: "Leech, we've spent more hours on the Rift together than either of us should admit out loud. Come celebrate with us — no chat bans, I promise."
   },
 
   "antonio": {
