@@ -39,6 +39,8 @@
   .dearest{font-family:var(--sans);font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--soft);margin-bottom:10px}
   .guest-name{font-size:clamp(28px,6vw,36px);line-height:1.3}
   .personal-note{max-width:430px;margin:16px auto 0;font-size:18px;line-height:1.8;color:#5A4A3F;font-style:italic}
+  .from-both{max-width:430px;margin:20px auto 0;font-size:15px;line-height:1.7;color:var(--soft)}
+  .from-both .sig{display:block;font-family:var(--script);font-size:23px;color:#5A4A3F;margin-top:4px}
 
   /* photo */
   .photo-wrap{display:flex;justify-content:center;margin:.5rem 0 2.25rem}
@@ -121,11 +123,12 @@
     <div class="dearest" data-i18n="dearest">Dearest</div>
     <h1 class="guest-name" id="guestName">Friend</h1>
     <p class="personal-note" id="personalNote"></p>
+    <p class="from-both" id="fromBoth"></p>
   </section>
 
   <figure class="photo-wrap">
     <div class="polaroid">
-      <img src="engagement.jpg" alt="Andi and Max embracing on the beach, white roses and ocean waves behind them">
+      <img src="engagement.jpg" alt="Andi and Mariel embracing on the beach, white roses and ocean waves behind them">
       <figcaption data-i18n="caption">together forever</figcaption>
     </div>
   </figure>
@@ -226,6 +229,9 @@ const STRINGS = {
     announce:"We're getting married!",
     dearest:"Dearest",
     caption:"together forever",
+    fromBoth:"We both can't wait to celebrate with you.",
+    fromBothPlural:"We both can't wait to celebrate with all of you.",
+    sig:"Andi &amp; Mariel",
     when:"When", whenValue:"Sept 18, 2026<br>4:30 – 8:00 pm",
     where:"Where", wear:"Wear", wearValue:"Neutral tones",
     join:"Will you join us?",
@@ -258,6 +264,9 @@ const STRINGS = {
     announce:"¡Nos vamos a casar!",
     dearest:"Querido/a",
     caption:"juntos para siempre",
+    fromBoth:"Los dos tenemos muchas ganas de celebrar contigo.",
+    fromBothPlural:"Los dos tenemos muchas ganas de celebrar con ustedes.",
+    sig:"Andi y Mariel",
     when:"Cuándo", whenValue:"18 de sept, 2026<br>4:30 – 8:00 pm",
     where:"Dónde", wear:"Vestimenta", wearValue:"Tonos neutros",
     join:"¿Nos acompañas?",
@@ -334,6 +343,12 @@ if (isFamily) {
   document.querySelector(".drinks-label").textContent = T.drinksEach;
   document.querySelector("#noPlusOneNote p").textContent = T.noPlusOneFam;
 }
+
+/* A closing line from the two of us — shown on every invite, under the
+   personal note. Plural form for family invites. */
+document.getElementById("fromBoth").innerHTML =
+  (isFamily ? T.fromBothPlural : T.fromBoth) +
+  '<span class="sig">' + T.sig + '</span>';
 
 /* ---------------- RSVP CHOICE ---------------- */
 let attending = null;

@@ -28,6 +28,13 @@ const GUESTS = {
   },
   // ---- Add your real guests below. Examples: ----
 
+  "martha-pablito": {
+    name: "Mamá y Pablito",
+    lang: "es",
+    members: ["Martha", "Pablo"],
+    note: "Mamá, no habría llegado hasta aquí sin ti. Todo lo que soy viene de ti, y no me imagino ese día sin tenerte cerca. Gracias por todo, siempre. Pablito, los quiero mucho a los dos."
+  },
+
   "lopez-family": {
      name: "The Lopez Family",
      lang: "es",
